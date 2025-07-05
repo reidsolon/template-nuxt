@@ -1,5 +1,15 @@
 # Nuxt Minimal Starter
 
+## Description
+
+Nuxt project: 
+- Vite
+- Tailwind
+- Pinia Store
+- ESLint
+- Prettier
+- Husky
+
 Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
 
 ## Setup
