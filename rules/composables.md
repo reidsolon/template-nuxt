@@ -25,9 +25,6 @@ Use kebab-case for composable files and match the export name: `use-auth.ts`, `u
 ### File Organization
 
 ```
-
-```
-
 composables/
 ├── use-auth.ts # Global shared composables
 ├── use-api-client.ts # Global shared composables
@@ -43,9 +40,6 @@ modules/
 └── settings/
 └── \_composables/
 └── use-settings.ts
-
-```
-
 ```
 
 ### Export Pattern
