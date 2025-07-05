@@ -32,14 +32,14 @@ composables/
 
 modules/
 ├── user/
-│ └── \_composables/
-│ └── use-user-profile.ts # Feature-specific composables
+|     └── _composables/
+|         └── use-user-profile.ts # Feature-specific composables
 ├── dashboard/
-│ └── \_composables/
-│ └── use-dashboard-stats.ts
+│     └── _composables/
+│         └── use-dashboard-stats.ts
 └── settings/
-└── \_composables/
-└── use-settings.ts
+      └── _composables/
+           └── use-settings.ts
 ```
 
 ### Export Pattern
