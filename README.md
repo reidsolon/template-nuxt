@@ -7,6 +7,7 @@ Nuxt project:
 - Vite
 - Tailwind
 - Pinia Store
+- Tanstack Query
 - ESLint
 - Prettier
 - Husky
