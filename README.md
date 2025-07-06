@@ -2,7 +2,7 @@
 
 ## Description
 
-Nuxt project:
+Nuxt project using/with:
 
 - Vite
 - Tailwind
