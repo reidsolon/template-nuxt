@@ -33,6 +33,10 @@ export default {
       plugins: [],
     },
   },
+  
+  plugins: [
+    '~/plugins/vue-query.ts',
+  ],
 
   imports: {
     dirs: ['composables', 'modules/*/_composables', 'stores'],

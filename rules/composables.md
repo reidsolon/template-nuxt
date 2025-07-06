@@ -114,6 +114,59 @@ export const useUser = () => {
 };
 ```
 
+### TanStack Query Example
+
+```typescript
+export interface Post {
+  id: number;
+  title: string;
+  body: string;
+  userId: number;
+}
+
+export const usePosts = () => {
+  const { data: posts, isLoading, error, refetch } = useQuery({
+    queryKey: ['posts'],
+    queryFn: async () => {
+      const response = await $fetch<Post[]>('/api/posts');
+      return response;
+    },
+    staleTime: 5 * 60 * 1000, // 5 minutes
+    gcTime: 10 * 60 * 1000, // 10 minutes
+  });
+
+  const { mutate: createPost, isPending: isCreating } = useMutation({
+    mutationFn: async (newPost: Omit<Post, 'id'>) => {
+      return await $fetch<Post>('/api/posts', {
+        method: 'POST',
+        body: newPost,
+      });
+    },
+    onSuccess: () => {
+      // Invalidate and refetch posts
+      refetch();
+    },
+  });
+
+  return {
+    posts,
+    isLoading,
+    error,
+    refetch,
+    createPost,
+    isCreating,
+  };
+};
+```
+
+This example demonstrates:
+
+- Using `useQuery` for data fetching with caching
+- Using `useMutation` for data mutations
+- Proper TypeScript typing
+- Cache invalidation after mutations
+- Configuring stale time and garbage collection time
+
 ### Auto-imports
 
 Leverage Nuxt's auto-import feature by placing composables in the `composables/` directory. No need for manual imports in components.
