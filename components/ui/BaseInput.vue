@@ -19,9 +19,7 @@
         'flex h-10 w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-sm file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50',
         error ? 'border-red-500 focus:ring-red-500' : '',
       ]"
-      @input="
-        $emit('update:modelValue', ($event.target as HTMLInputElement).value)
-      "
+      @input="$emit('update:modelValue', ($event.target as HTMLInputElement).value)"
       @focus="$emit('focus', $event)"
       @blur="$emit('blur', $event)"
     />
@@ -40,7 +38,7 @@
 interface Props {
   id?: string;
   label?: string;
-  type?: "text" | "email" | "password" | "number" | "tel" | "url" | "search" | "date" | "time" | "datetime-local";
+  type?: 'text' | 'email' | 'password' | 'number' | 'tel' | 'url' | 'search' | 'date' | 'time' | 'datetime-local';
   modelValue?: string | number;
   placeholder?: string;
   required?: boolean;
@@ -53,13 +51,13 @@ interface Props {
 }
 
 defineEmits<{
-  "update:modelValue": [value: string | number];
+  'update:modelValue': [value: string | number];
   focus: [event: FocusEvent];
   blur: [event: FocusEvent];
 }>();
 
 withDefaults(defineProps<Props>(), {
-  type: "text",
+  type: 'text',
   required: false,
   disabled: false,
 });

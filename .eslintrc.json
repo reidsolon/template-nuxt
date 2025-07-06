@@ -1,10 +1,6 @@
 {
   "root": true,
-  "extends": [
-    "@nuxt/eslint-config",
-    "eslint:recommended",
-    "@vue/eslint-config-typescript/recommended"
-  ],
+  "extends": ["@nuxt/eslint-config", "eslint:recommended", "@vue/eslint-config-typescript/recommended"],
   "parserOptions": {
     "ecmaVersion": "latest",
     "sourceType": "module"
@@ -27,32 +23,47 @@
     "vue/no-unused-vars": "error",
     "vue/no-unused-components": "warn",
     "vue/padding-line-between-blocks": ["error", "always"],
-    "vue/block-tag-newline": ["error", {
-      "singleline": "always",
-      "multiline": "always"
-    }],
-    "vue/html-self-closing": ["error", {
-      "html": {
-        "void": "always",
-        "normal": "always",
-        "component": "always"
-      },
-      "svg": "always",
-      "math": "always"
-    }],
-    "vue/max-attributes-per-line": ["error", {
-      "singleline": 3,
-      "multiline": 1
-    }],
-    "vue/first-attribute-linebreak": ["error", {
-      "singleline": "ignore",
-      "multiline": "below"
-    }],
-    "vue/html-closing-bracket-newline": ["error", {
-      "singleline": "never",
-      "multiline": "always"
-    }],
-    
+    "vue/block-tag-newline": [
+      "error",
+      {
+        "singleline": "always",
+        "multiline": "always"
+      }
+    ],
+    "vue/html-self-closing": [
+      "error",
+      {
+        "html": {
+          "void": "always",
+          "normal": "always",
+          "component": "always"
+        },
+        "svg": "always",
+        "math": "always"
+      }
+    ],
+    "vue/max-attributes-per-line": [
+      "error",
+      {
+        "singleline": 3,
+        "multiline": 1
+      }
+    ],
+    "vue/first-attribute-linebreak": [
+      "error",
+      {
+        "singleline": "ignore",
+        "multiline": "below"
+      }
+    ],
+    "vue/html-closing-bracket-newline": [
+      "error",
+      {
+        "singleline": "never",
+        "multiline": "always"
+      }
+    ],
+
     // TypeScript specific rules
     "@typescript-eslint/no-unused-vars": ["error", { "argsIgnorePattern": "^_" }],
     "@typescript-eslint/no-explicit-any": "warn",
@@ -61,7 +72,7 @@
     "@typescript-eslint/ban-ts-comment": "warn",
     "@typescript-eslint/prefer-const": "error",
     "@typescript-eslint/no-non-null-assertion": "warn",
-    
+
     // General JavaScript/TypeScript rules
     "no-console": ["warn", { "allow": ["warn", "error"] }],
     "no-debugger": "warn",
@@ -76,11 +87,14 @@
     "quotes": ["error", "single", { "avoidEscape": true }],
     "semi": ["error", "never"],
     "indent": ["error", 2, { "SwitchCase": 1 }],
-    "space-before-function-paren": ["error", {
-      "anonymous": "always",
-      "named": "never",
-      "asyncArrow": "always"
-    }],
+    "space-before-function-paren": [
+      "error",
+      {
+        "anonymous": "always",
+        "named": "never",
+        "asyncArrow": "always"
+      }
+    ],
     "keyword-spacing": "error",
     "space-infix-ops": "error",
     "comma-spacing": "error",
@@ -89,23 +103,19 @@
     "handle-callback-err": "error",
     "no-multiple-empty-lines": ["error", { "max": 1 }],
     "operator-linebreak": ["error", "before"],
-    
+
     // Import rules
-    "import/order": ["error", {
-      "groups": [
-        "builtin",
-        "external",
-        "internal",
-        "parent",
-        "sibling",
-        "index"
-      ],
-      "newlines-between": "always",
-      "alphabetize": {
-        "order": "asc",
-        "caseInsensitive": true
+    "import/order": [
+      "error",
+      {
+        "groups": ["builtin", "external", "internal", "parent", "sibling", "index"],
+        "newlines-between": "always",
+        "alphabetize": {
+          "order": "asc",
+          "caseInsensitive": true
+        }
       }
-    }],
+    ],
     "import/no-unresolved": "off", // Nuxt handles this
     "import/no-named-as-default": "off"
   },

@@ -7,21 +7,22 @@
 </template>
 
 <script setup lang="ts">
-import CalorieDashboard from '../../modules/calorie/_components/CalorieDashboard.vue'
+import CalorieDashboard from '../../modules/calorie/_components/CalorieDashboard.vue';
 
 // Set page meta
 definePageMeta({
   title: 'Calorie Tracker',
-  description: 'Track your daily calories and nutrition'
-})
+  description: 'Track your daily calories and nutrition',
+});
 
 useHead({
   title: 'Calorie Tracker - Dashboard',
   meta: [
     {
       name: 'description',
-      content: 'Track your daily calories, monitor your nutrition goals, and stay healthy with our comprehensive calorie tracking dashboard.'
-    }
-  ]
-})
+      content:
+        'Track your daily calories, monitor your nutrition goals, and stay healthy with our comprehensive calorie tracking dashboard.',
+    },
+  ],
+});
 </script>

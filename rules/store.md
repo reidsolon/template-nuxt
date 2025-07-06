@@ -5,13 +5,13 @@
 ### Basic Store Template
 
 ```typescript
-import { defineStore } from "pinia";
+import { defineStore } from 'pinia';
 
 // Define the entity type
 interface Entity {
   id: number;
   name: string;
-  status: "active" | "inactive";
+  status: 'active' | 'inactive';
   createdAt: Date;
   updatedAt: Date;
 }
@@ -32,13 +32,13 @@ const initialState: EntityState = {
   selectedEntity: null,
 };
 
-export const useEntityStore = defineStore("entityStore", () => {
+export const useEntityStore = defineStore('entityStore', () => {
   // State
   const state = ref<EntityState>(initialState);
 
   // Getters
   const activeEntities = computed((): Entity[] => {
-    return state.value.entities.filter((entity) => entity.status === "active");
+    return state.value.entities.filter((entity) => entity.status === 'active');
   });
 
   const entityCount = computed((): number => {
@@ -77,9 +77,7 @@ export const useEntityStore = defineStore("entityStore", () => {
   };
 
   const removeEntity = (id: number): void => {
-    state.value.entities = state.value.entities.filter(
-      (entity) => entity.id !== id,
-    );
+    state.value.entities = state.value.entities.filter((entity) => entity.id !== id);
   };
 
   const selectEntity = (entity: Entity | null): void => {
@@ -134,7 +132,7 @@ export const useAuth = () => {
   const login = async (credentials: LoginCredentials) => {
     try {
       await store.login(credentials);
-      navigateTo("/dashboard");
+      navigateTo('/dashboard');
     } catch (error) {
       // Handle error
     }
@@ -194,15 +192,15 @@ modules/
 
 ```typescript
 // Global stores
-export { useAuthStore } from "./auth";
-export { useUserStore } from "./user";
-export { useNotificationStore } from "./notification";
+export { useAuthStore } from './auth';
+export { useUserStore } from './user';
+export { useNotificationStore } from './notification';
 
 // Feature-specific stores (if needed globally)
-export { useUserProfileStore } from "../modules/user/_stores/user-profile";
-export { useDashboardStatsStore } from "../modules/dashboard/_stores/dashboard-stats";
-export { useProductCatalogStore } from "../modules/products/_stores/product-catalog";
-export { useUserSettingsStore } from "../modules/settings/_stores/user-settings";
+export { useUserProfileStore } from '../modules/user/_stores/user-profile';
+export { useDashboardStatsStore } from '../modules/dashboard/_stores/dashboard-stats';
+export { useProductCatalogStore } from '../modules/products/_stores/product-catalog';
+export { useUserSettingsStore } from '../modules/settings/_stores/user-settings';
 ```
 
 ## When to Use Pinia

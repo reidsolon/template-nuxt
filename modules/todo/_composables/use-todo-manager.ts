@@ -1,6 +1,5 @@
-import type { TodoItem, CreateTodoInput, UpdateTodoInput } from '../_types/todo'
-import { useTodoStore } from '../_stores/todo'
-import { storeToRefs } from 'pinia'
+import { storeToRefs } from 'pinia';
+import { useTodoStore } from '../_stores/todo';
 
 /**
  * Main todo management composable
@@ -8,15 +7,15 @@ import { storeToRefs } from 'pinia'
  */
 export const useTodoManager = () => {
   // Use Pinia store
-  const todoStore = useTodoStore()
-  
+  const todoStore = useTodoStore();
+
   // Extract reactive state using storeToRefs
-  const { state, hasError, isLoading } = storeToRefs(todoStore)
-  
+  const { state, hasError, isLoading } = storeToRefs(todoStore);
+
   // Computed properties for backward compatibility
-  const todos = computed(() => state.value.todos)
-  const error = computed(() => state.value.error)
-  const isInitialized = computed(() => state.value.isInitialized)
+  const todos = computed(() => state.value.todos);
+  const error = computed(() => state.value.error);
+  const isInitialized = computed(() => state.value.isInitialized);
 
   // Store actions (these maintain the same API as before)
   const {
@@ -37,8 +36,8 @@ export const useTodoManager = () => {
     undo,
     redo,
     canUndo,
-    canRedo
-  } = todoStore
+    canRedo,
+  } = todoStore;
 
   return {
     // State
@@ -65,6 +64,6 @@ export const useTodoManager = () => {
     batchUpdateTodos,
     batchDeleteTodos,
     undo,
-    redo
-  }
-}
+    redo,
+  };
+};

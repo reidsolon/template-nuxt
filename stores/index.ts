@@ -1,5 +1,5 @@
 // Global stores
-export { useCounterStore } from "./counter";
+export { useCounterStore } from './counter';
 
 // Feature-specific stores
-export { useTodoStore } from "../modules/todo/_stores/todo";
+export { useTodoStore } from '../modules/todo/_stores/todo';

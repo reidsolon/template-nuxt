@@ -2,7 +2,8 @@
 
 ## Description
 
-Nuxt project: 
+Nuxt project:
+
 - Vite
 - Tailwind
 - Pinia Store

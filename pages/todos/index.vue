@@ -7,21 +7,20 @@
 </template>
 
 <script setup lang="ts">
-import TodoList from "~/modules/todo/_components/TodoList.vue";
+import TodoList from '~/modules/todo/_components/TodoList.vue';
 
 // Set page meta
 definePageMeta({
-  title: "Todos",
+  title: 'Todos',
 });
 
 // Set head
 useHead({
-  title: "Todos - My Todo App",
+  title: 'Todos - My Todo App',
   meta: [
     {
-      name: "description",
-      content:
-        "Manage your todos efficiently with our simple and intuitive todo application.",
+      name: 'description',
+      content: 'Manage your todos efficiently with our simple and intuitive todo application.',
     },
   ],
 });

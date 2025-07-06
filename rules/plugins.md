@@ -52,8 +52,8 @@ export default defineNuxtPlugin(() => {
 ```typescript
 // plugins/example.ts
 export default defineNuxtPlugin({
-  name: "example-plugin",
-  dependsOn: ["other-plugin"],
+  name: 'example-plugin',
+  dependsOn: ['other-plugin'],
   async setup() {
     // Initialize plugin
     const service = await initializeService();

@@ -83,16 +83,16 @@ export interface User {
 }
 
 export const useUser = () => {
-  const user = useState<User | null>("user", () => null);
-  const loading = useState<boolean>("user_loading", () => false);
-  const error = useState<string | null>("user_error", () => null);
+  const user = useState<User | null>('user', () => null);
+  const loading = useState<boolean>('user_loading', () => false);
+  const error = useState<string | null>('user_error', () => null);
 
   const fetchUser = async () => {
     loading.value = true;
     error.value = null;
 
     try {
-      const { data, error: fetchError } = await useFetch<User>("/api/user");
+      const { data, error: fetchError } = await useFetch<User>('/api/user');
 
       if (fetchError.value) throw new Error(fetchError.value.message);
 

@@ -74,7 +74,7 @@ components/
     <h2>{{ user.name }}</h2>
     <p>{{ user.email }}</p>
     <button @click="handleClick">
-      {{ isLoading ? "Loading..." : "Contact" }}
+      {{ isLoading ? 'Loading...' : 'Contact' }}
     </button>
   </div>
 </template>
@@ -99,14 +99,14 @@ const emit = defineEmits<{
   contact: [userId: number];
 }>();
 
-const isLoading: Ref<boolean> = useState("user-card-loading", () => false);
+const isLoading: Ref<boolean> = useState('user-card-loading', () => false);
 
 const handleClick = async (): Promise<void> => {
   if (props.disabled) return;
 
   isLoading.value = true;
   try {
-    emit("contact", props.user.id);
+    emit('contact', props.user.id);
   } finally {
     isLoading.value = false;
   }

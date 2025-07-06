@@ -10,19 +10,17 @@
       <!-- Current Goal -->
       <div class="mb-8">
         <h2 class="text-lg font-semibold text-gray-900 mb-4">Current Goal</h2>
-        
+
         <div v-if="activeGoal" class="bg-white border border-gray-200 rounded-lg p-6">
           <div class="flex justify-between items-start mb-4">
             <div>
               <h3 class="text-lg font-medium text-gray-900">{{ activeGoal.dailyCalories }} calories/day</h3>
-              <p class="text-sm text-gray-600">{{ formatGoalType(activeGoal.goal) }} • {{ formatActivityLevel(activeGoal.activityLevel) }}</p>
+              <p class="text-sm text-gray-600">
+                {{ formatGoalType(activeGoal.goal) }} • {{ formatActivityLevel(activeGoal.activityLevel) }}
+              </p>
             </div>
             <div class="flex space-x-2">
-              <BaseButton
-                variant="secondary"
-                size="sm"
-                @click="editActiveGoal"
-              >
+              <BaseButton variant="secondary" size="sm" @click="editActiveGoal">
                 <Icon name="heroicons:pencil" class="w-4 h-4 mr-1" />
                 Edit
               </BaseButton>
@@ -60,21 +58,14 @@
       <div class="mb-8">
         <div class="flex justify-between items-center mb-4">
           <h2 class="text-lg font-semibold text-gray-900">Goal History</h2>
-          <BaseButton
-            variant="secondary"
-            @click="showAddForm = true"
-          >
+          <BaseButton variant="secondary" @click="showAddForm = true">
             <Icon name="heroicons:plus" class="w-4 h-4 mr-2" />
             Add New Goal
           </BaseButton>
         </div>
 
         <div v-if="allGoals.length > 0" class="space-y-4">
-          <div
-            v-for="goal in allGoals"
-            :key="goal.id"
-            class="bg-white border border-gray-200 rounded-lg p-4"
-          >
+          <div v-for="goal in allGoals" :key="goal.id" class="bg-white border border-gray-200 rounded-lg p-4">
             <div class="flex justify-between items-start">
               <div>
                 <div class="flex items-center space-x-2 mb-2">
@@ -91,25 +82,14 @@
                   <span>Carbs: {{ goal.carbs || 0 }}g</span>
                   <span>Fat: {{ goal.fat || 0 }}g</span>
                 </div>
-                <p class="text-xs text-gray-400 mt-2">
-                  Created: {{ formatDate(goal.createdAt) }}
-                </p>
+                <p class="text-xs text-gray-400 mt-2">Created: {{ formatDate(goal.createdAt) }}</p>
               </div>
-              
+
               <div class="flex space-x-2">
-                <BaseButton
-                  variant="secondary"
-                  size="sm"
-                  @click="editGoal(goal)"
-                >
+                <BaseButton variant="secondary" size="sm" @click="editGoal(goal)">
                   <Icon name="heroicons:pencil" class="w-4 h-4" />
                 </BaseButton>
-                <BaseButton
-                  variant="destructive"
-                  size="sm"
-                  @click="deleteGoal(goal.id)"
-                  :disabled="goal.isActive"
-                >
+                <BaseButton variant="destructive" size="sm" @click="deleteGoal(goal.id)" :disabled="goal.isActive">
                   <Icon name="heroicons:trash" class="w-4 h-4" />
                 </BaseButton>
               </div>
@@ -125,21 +105,18 @@
       </div>
 
       <!-- Add Goal Modal -->
-      <div 
+      <div
         v-if="showAddForm"
         class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4"
         @click="showAddForm = false"
       >
         <div @click.stop class="w-full max-w-4xl max-h-screen overflow-y-auto">
-          <CalorieGoalSettings
-            @submit="handleAdd"
-            @cancel="showAddForm = false"
-          />
+          <CalorieGoalSettings @submit="handleAdd" @cancel="showAddForm = false" />
         </div>
       </div>
 
       <!-- Edit Goal Modal -->
-      <div 
+      <div
         v-if="showEditForm && editingGoal"
         class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4"
         @click="showEditForm = false"
@@ -158,127 +135,121 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, onMounted } from 'vue'
-import type { CalorieGoal, CreateCalorieGoalInput, UpdateCalorieGoalInput } from '../../modules/calorie/_types/calorie'
-import { useCalorieManager } from '../../modules/calorie/_composables/use-calorie-manager'
-import CalorieGoalSettings from '../../modules/calorie/_components/CalorieGoalSettings.vue'
+import { ref, computed, onMounted } from 'vue';
+import type { CalorieGoal, CreateCalorieGoalInput, UpdateCalorieGoalInput } from '../../modules/calorie/_types/calorie';
+import { useCalorieManager } from '../../modules/calorie/_composables/use-calorie-manager';
+import CalorieGoalSettings from '../../modules/calorie/_components/CalorieGoalSettings.vue';
 
 // Set page meta
 definePageMeta({
   title: 'Calorie Goals',
-  description: 'Set and manage your daily calorie and nutrition goals'
-})
+  description: 'Set and manage your daily calorie and nutrition goals',
+});
 
 useHead({
   title: 'Calorie Goals - Set Your Nutrition Targets',
   meta: [
     {
       name: 'description',
-      content: 'Set your daily calorie goals, track your nutrition targets, and monitor your progress towards a healthier lifestyle.'
-    }
-  ]
-})
+      content:
+        'Set your daily calorie goals, track your nutrition targets, and monitor your progress towards a healthier lifestyle.',
+    },
+  ],
+});
 
-const {
-  initialize,
-  calorieGoals,
-  getActiveGoal,
-  setGoal,
-  updateGoal,
-  clearAllData
-} = useCalorieManager()
+const { initialize, calorieGoals, getActiveGoal, setGoal, updateGoal, clearAllData } = useCalorieManager();
 
 // Component state
-const showAddForm = ref(false)
-const showEditForm = ref(false)
-const editingGoal = ref<CalorieGoal | null>(null)
+const showAddForm = ref(false);
+const showEditForm = ref(false);
+const editingGoal = ref<CalorieGoal | null>(null);
 
 // Computed properties
-const activeGoal = computed(() => getActiveGoal())
-const allGoals = computed(() => calorieGoals.value.slice().sort((a, b) => 
-  new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
-))
+const activeGoal = computed(() => getActiveGoal());
+const allGoals = computed(() =>
+  calorieGoals.value.slice().sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
+);
 
 // Methods
 const handleAdd = async (data: CreateCalorieGoalInput | UpdateCalorieGoalInput) => {
   try {
-    await setGoal(data as CreateCalorieGoalInput)
-    showAddForm.value = false
+    await setGoal(data as CreateCalorieGoalInput);
+    showAddForm.value = false;
   } catch (error) {
-    console.error('Failed to add goal:', error)
+    console.error('Failed to add goal:', error);
     // You could show a toast notification here
   }
-}
+};
 
 const editActiveGoal = () => {
-  const goal = getActiveGoal()
+  const goal = getActiveGoal();
   if (goal) {
-    editingGoal.value = goal
-    showEditForm.value = true
+    editingGoal.value = goal;
+    showEditForm.value = true;
   }
-}
+};
 
 const editGoal = (goal: CalorieGoal) => {
-  editingGoal.value = goal
-  showEditForm.value = true
-}
+  editingGoal.value = goal;
+  showEditForm.value = true;
+};
 
 const handleUpdate = async (data: CreateCalorieGoalInput | UpdateCalorieGoalInput) => {
-  if (!editingGoal.value) return
-  
+  if (!editingGoal.value) return;
+
   try {
-    await updateGoal(editingGoal.value.id, data as UpdateCalorieGoalInput)
-    showEditForm.value = false
-    editingGoal.value = null
+    await updateGoal(editingGoal.value.id, data as UpdateCalorieGoalInput);
+    showEditForm.value = false;
+    editingGoal.value = null;
   } catch (error) {
-    console.error('Failed to update goal:', error)
+    console.error('Failed to update goal:', error);
     // You could show a toast notification here
   }
-}
+};
 
 const deleteGoal = async (goalId: string) => {
   if (confirm('Are you sure you want to delete this goal?')) {
     try {
       // Implementation would be added to the manager
       // await deleteGoal(goalId)
-      console.log('Delete goal:', goalId)
+      console.log('Delete goal:', goalId);
     } catch (error) {
-      console.error('Failed to delete goal:', error)
+      console.error('Failed to delete goal:', error);
       // You could show a toast notification here
     }
   }
-}
+};
 
 const formatGoalType = (goal: string): string => {
   const types = {
     'lose-weight': 'Lose Weight',
     'maintain-weight': 'Maintain Weight',
-    'gain-weight': 'Gain Weight'
-  }
-  return types[goal as keyof typeof types] || goal
-}
+    'gain-weight': 'Gain Weight',
+  };
+  return types[goal as keyof typeof types] || goal;
+};
 
 const formatActivityLevel = (level: string): string => {
   const levels = {
-    'sedentary': 'Sedentary',
+    sedentary: 'Sedentary',
     'lightly-active': 'Lightly Active',
     'moderately-active': 'Moderately Active',
     'very-active': 'Very Active',
-    'extremely-active': 'Extremely Active'
-  }
-  return levels[level as keyof typeof levels] || level
-}
+    'extremely-active': 'Extremely Active',
+  };
+  return levels[level as keyof typeof levels] || level;
+};
 
 const formatDate = (date: Date): string => {
-  return date.toLocaleDateString('en-US', { 
-    year: 'numeric', 
-    month: 'short', 
-    day: 'numeric' 
-  })
-}
+  return date.toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'short',
+    day: 'numeric',
+  });
+};
 
 // Initialize
 onMounted(async () => {
-  await initialize()
-})
+  await initialize();
+});
 </script>

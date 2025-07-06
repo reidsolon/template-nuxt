@@ -14,9 +14,7 @@
         'flex h-10 w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50',
         error ? 'border-red-500 focus:ring-red-500' : '',
       ]"
-      @change="
-        $emit('update:modelValue', ($event.target as HTMLSelectElement).value)
-      "
+      @change="$emit('update:modelValue', ($event.target as HTMLSelectElement).value)"
     >
       <option v-if="placeholder" value="" disabled>{{ placeholder }}</option>
       <slot />
@@ -45,7 +43,7 @@ interface Props {
 }
 
 defineEmits<{
-  "update:modelValue": [value: string];
+  'update:modelValue': [value: string];
 }>();
 
 withDefaults(defineProps<Props>(), {

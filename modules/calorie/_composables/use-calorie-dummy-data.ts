@@ -1,14 +1,13 @@
-import { v4 as uuidv4 } from 'uuid'
-import type { FoodItem, CalorieEntry, CalorieGoal } from '../_types/calorie'
+import { v4 as uuidv4 } from 'uuid';
+import type { CalorieEntry, CalorieGoal, FoodItem } from '../_types/calorie';
 
 /**
  * Composable for managing dummy/sample data
  */
 export const useCalorieDummyData = () => {
-  
   const createDummyFoodItems = (): FoodItem[] => {
-    const now = new Date()
-    
+    const now = new Date();
+
     return [
       // Fruits
       {
@@ -24,11 +23,11 @@ export const useCalorieDummyData = () => {
           fat: 0.3,
           fiber: 4,
           sugar: 19,
-          sodium: 2
+          sodium: 2,
         },
         isCustom: false,
         createdAt: now,
-        updatedAt: now
+        updatedAt: now,
       },
       {
         id: uuidv4(),
@@ -43,11 +42,11 @@ export const useCalorieDummyData = () => {
           fat: 0.4,
           fiber: 3,
           sugar: 21,
-          sodium: 1
+          sodium: 1,
         },
         isCustom: false,
         createdAt: now,
-        updatedAt: now
+        updatedAt: now,
       },
       {
         id: uuidv4(),
@@ -62,13 +61,13 @@ export const useCalorieDummyData = () => {
           fat: 0.2,
           fiber: 3,
           sugar: 12,
-          sodium: 0
+          sodium: 0,
         },
         isCustom: false,
         createdAt: now,
-        updatedAt: now
+        updatedAt: now,
       },
-      
+
       // Vegetables
       {
         id: uuidv4(),
@@ -83,11 +82,11 @@ export const useCalorieDummyData = () => {
           fat: 0.4,
           fiber: 2.6,
           sugar: 1.5,
-          sodium: 33
+          sodium: 33,
         },
         isCustom: false,
         createdAt: now,
-        updatedAt: now
+        updatedAt: now,
       },
       {
         id: uuidv4(),
@@ -102,13 +101,13 @@ export const useCalorieDummyData = () => {
           fat: 0.2,
           fiber: 2.8,
           sugar: 4.7,
-          sodium: 69
+          sodium: 69,
         },
         isCustom: false,
         createdAt: now,
-        updatedAt: now
+        updatedAt: now,
       },
-      
+
       // Grains
       {
         id: uuidv4(),
@@ -123,11 +122,11 @@ export const useCalorieDummyData = () => {
           fat: 0.9,
           fiber: 1.8,
           sugar: 0.4,
-          sodium: 5
+          sodium: 5,
         },
         isCustom: false,
         createdAt: now,
-        updatedAt: now
+        updatedAt: now,
       },
       {
         id: uuidv4(),
@@ -142,13 +141,13 @@ export const useCalorieDummyData = () => {
           fat: 1.1,
           fiber: 1.9,
           sugar: 1.4,
-          sodium: 144
+          sodium: 144,
         },
         isCustom: false,
         createdAt: now,
-        updatedAt: now
+        updatedAt: now,
       },
-      
+
       // Proteins
       {
         id: uuidv4(),
@@ -163,11 +162,11 @@ export const useCalorieDummyData = () => {
           fat: 3.6,
           fiber: 0,
           sugar: 0,
-          sodium: 74
+          sodium: 74,
         },
         isCustom: false,
         createdAt: now,
-        updatedAt: now
+        updatedAt: now,
       },
       {
         id: uuidv4(),
@@ -182,11 +181,11 @@ export const useCalorieDummyData = () => {
           fat: 5,
           fiber: 0,
           sugar: 0.6,
-          sodium: 70
+          sodium: 70,
         },
         isCustom: false,
         createdAt: now,
-        updatedAt: now
+        updatedAt: now,
       },
       {
         id: uuidv4(),
@@ -201,13 +200,13 @@ export const useCalorieDummyData = () => {
           fat: 0.4,
           fiber: 0,
           sugar: 3.2,
-          sodium: 36
+          sodium: 36,
         },
         isCustom: false,
         createdAt: now,
-        updatedAt: now
+        updatedAt: now,
       },
-      
+
       // Dairy
       {
         id: uuidv4(),
@@ -222,13 +221,13 @@ export const useCalorieDummyData = () => {
           fat: 5,
           fiber: 0,
           sugar: 12,
-          sodium: 115
+          sodium: 115,
         },
         isCustom: false,
         createdAt: now,
-        updatedAt: now
+        updatedAt: now,
       },
-      
+
       // Snacks
       {
         id: uuidv4(),
@@ -243,13 +242,13 @@ export const useCalorieDummyData = () => {
           fat: 14,
           fiber: 3.5,
           sugar: 1.2,
-          sodium: 0
+          sodium: 0,
         },
         isCustom: false,
         createdAt: now,
-        updatedAt: now
+        updatedAt: now,
       },
-      
+
       // Beverages
       {
         id: uuidv4(),
@@ -264,11 +263,11 @@ export const useCalorieDummyData = () => {
           fat: 0,
           fiber: 0,
           sugar: 0,
-          sodium: 0
+          sodium: 0,
         },
         isCustom: false,
         createdAt: now,
-        updatedAt: now
+        updatedAt: now,
       },
       {
         id: uuidv4(),
@@ -283,137 +282,137 @@ export const useCalorieDummyData = () => {
           fat: 0,
           fiber: 0,
           sugar: 0,
-          sodium: 2
+          sodium: 2,
         },
         isCustom: false,
         createdAt: now,
-        updatedAt: now
-      }
-    ]
-  }
+        updatedAt: now,
+      },
+    ];
+  };
 
   const createDummyCalorieEntries = (foodItems: FoodItem[]): CalorieEntry[] => {
-    const now = new Date()
-    const yesterday = new Date(now)
-    yesterday.setDate(now.getDate() - 1)
-    
-    const entries: CalorieEntry[] = []
-    
+    const now = new Date();
+    const yesterday = new Date(now);
+    yesterday.setDate(now.getDate() - 1);
+
+    const entries: CalorieEntry[] = [];
+
     // Today's entries
-    const todayBreakfast = new Date(now)
-    todayBreakfast.setHours(8, 0, 0, 0)
-    
-    const todayLunch = new Date(now)
-    todayLunch.setHours(12, 30, 0, 0)
-    
-    const todayDinner = new Date(now)
-    todayDinner.setHours(19, 0, 0, 0)
-    
+    const todayBreakfast = new Date(now);
+    todayBreakfast.setHours(8, 0, 0, 0);
+
+    const todayLunch = new Date(now);
+    todayLunch.setHours(12, 30, 0, 0);
+
+    const todayDinner = new Date(now);
+    todayDinner.setHours(19, 0, 0, 0);
+
     // Yesterday's entries
-    const yesterdayBreakfast = new Date(yesterday)
-    yesterdayBreakfast.setHours(8, 30, 0, 0)
-    
-    const yesterdayLunch = new Date(yesterday)
-    yesterdayLunch.setHours(13, 0, 0, 0)
-    
-    const yesterdayDinner = new Date(yesterday)
-    yesterdayDinner.setHours(18, 30, 0, 0)
+    const yesterdayBreakfast = new Date(yesterday);
+    yesterdayBreakfast.setHours(8, 30, 0, 0);
+
+    const yesterdayLunch = new Date(yesterday);
+    yesterdayLunch.setHours(13, 0, 0, 0);
+
+    const yesterdayDinner = new Date(yesterday);
+    yesterdayDinner.setHours(18, 30, 0, 0);
 
     // Sample entries
     const sampleEntries = [
       // Today
       {
         id: uuidv4(),
-        foodId: foodItems.find(f => f.name === 'Eggs')?.id || foodItems[0].id,
+        foodId: foodItems.find((f) => f.name === 'Eggs')?.id || foodItems[0].id,
         quantity: 2,
         mealType: 'breakfast' as const,
         consumedAt: todayBreakfast,
         notes: 'Scrambled with vegetables',
         createdAt: now,
-        updatedAt: now
+        updatedAt: now,
       },
       {
         id: uuidv4(),
-        foodId: foodItems.find(f => f.name === 'Whole Wheat Bread')?.id || foodItems[1].id,
+        foodId: foodItems.find((f) => f.name === 'Whole Wheat Bread')?.id || foodItems[1].id,
         quantity: 2,
         mealType: 'breakfast' as const,
         consumedAt: todayBreakfast,
         createdAt: now,
-        updatedAt: now
+        updatedAt: now,
       },
       {
         id: uuidv4(),
-        foodId: foodItems.find(f => f.name === 'Chicken Breast')?.id || foodItems[2].id,
+        foodId: foodItems.find((f) => f.name === 'Chicken Breast')?.id || foodItems[2].id,
         quantity: 1.5,
         mealType: 'lunch' as const,
         consumedAt: todayLunch,
         createdAt: now,
-        updatedAt: now
+        updatedAt: now,
       },
       {
         id: uuidv4(),
-        foodId: foodItems.find(f => f.name === 'Brown Rice')?.id || foodItems[3].id,
+        foodId: foodItems.find((f) => f.name === 'Brown Rice')?.id || foodItems[3].id,
         quantity: 1,
         mealType: 'lunch' as const,
         consumedAt: todayLunch,
         createdAt: now,
-        updatedAt: now
+        updatedAt: now,
       },
       {
         id: uuidv4(),
-        foodId: foodItems.find(f => f.name === 'Broccoli')?.id || foodItems[4].id,
+        foodId: foodItems.find((f) => f.name === 'Broccoli')?.id || foodItems[4].id,
         quantity: 1,
         mealType: 'lunch' as const,
         consumedAt: todayLunch,
         createdAt: now,
-        updatedAt: now
+        updatedAt: now,
       },
       {
         id: uuidv4(),
-        foodId: foodItems.find(f => f.name === 'Apple')?.id || foodItems[5].id,
+        foodId: foodItems.find((f) => f.name === 'Apple')?.id || foodItems[5].id,
         quantity: 1,
         mealType: 'snack' as const,
         consumedAt: new Date(now.getTime() - 2 * 60 * 60 * 1000), // 2 hours ago
         createdAt: now,
-        updatedAt: now
+        updatedAt: now,
       },
-      
+
       // Yesterday
       {
         id: uuidv4(),
-        foodId: foodItems.find(f => f.name === 'Greek Yogurt')?.id || foodItems[6].id,
+        foodId: foodItems.find((f) => f.name === 'Greek Yogurt')?.id || foodItems[6].id,
         quantity: 1,
         mealType: 'breakfast' as const,
         consumedAt: yesterdayBreakfast,
         createdAt: yesterday,
-        updatedAt: yesterday
+        updatedAt: yesterday,
       },
       {
         id: uuidv4(),
-        foodId: foodItems.find(f => f.name === 'Banana')?.id || foodItems[7].id,
+        foodId: foodItems.find((f) => f.name === 'Banana')?.id || foodItems[7].id,
         quantity: 1,
         mealType: 'breakfast' as const,
         consumedAt: yesterdayBreakfast,
         createdAt: yesterday,
-        updatedAt: yesterday
+        updatedAt: yesterday,
       },
       {
         id: uuidv4(),
-        foodId: foodItems.find(f => f.name === 'Almonds')?.id || foodItems[8].id,
+        foodId: foodItems.find((f) => f.name === 'Almonds')?.id || foodItems[8].id,
         quantity: 1,
         mealType: 'snack' as const,
         consumedAt: new Date(yesterday.getTime() + 10 * 60 * 60 * 1000), // 10 AM yesterday
         createdAt: yesterday,
-        updatedAt: yesterday
-      }
-    ]
+        updatedAt: yesterday,
+      },
+    ];
 
-    return sampleEntries
-  }
+    return sampleEntries;
+  };
 
   const createDummyCalorieGoals = (): CalorieGoal[] => {
-    const now = new Date()
-    
+    const now = new Date();
+
     return [
       {
         id: uuidv4(),
@@ -425,31 +424,31 @@ export const useCalorieDummyData = () => {
         goal: 'maintain-weight',
         isActive: true,
         createdAt: now,
-        updatedAt: now
-      }
-    ]
-  }
+        updatedAt: now,
+      },
+    ];
+  };
 
-  const initializeDummyData = (): { 
-    foodItems: FoodItem[], 
-    calorieEntries: CalorieEntry[], 
-    calorieGoals: CalorieGoal[] 
+  const initializeDummyData = (): {
+    foodItems: FoodItem[];
+    calorieEntries: CalorieEntry[];
+    calorieGoals: CalorieGoal[];
   } => {
-    const foodItems = createDummyFoodItems()
-    const calorieEntries = createDummyCalorieEntries(foodItems)
-    const calorieGoals = createDummyCalorieGoals()
-    
+    const foodItems = createDummyFoodItems();
+    const calorieEntries = createDummyCalorieEntries(foodItems);
+    const calorieGoals = createDummyCalorieGoals();
+
     return {
       foodItems,
       calorieEntries,
-      calorieGoals
-    }
-  }
+      calorieGoals,
+    };
+  };
 
   return {
     createDummyFoodItems,
     createDummyCalorieEntries,
     createDummyCalorieGoals,
-    initializeDummyData
-  }
-}
+    initializeDummyData,
+  };
+};

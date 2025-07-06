@@ -1,4 +1,4 @@
-import { defineStore } from "pinia";
+import { defineStore } from 'pinia';
 
 interface CounterState {
   count: number;
@@ -8,7 +8,7 @@ const initialState: CounterState = {
   count: 0,
 };
 
-export const useCounterStore = defineStore("counter", () => {
+export const useCounterStore = defineStore('counter', () => {
   // State
   const state = ref<CounterState>(initialState);
 

@@ -81,11 +81,7 @@ Use CSS modules for complex components:
 .complexComponent {
   @apply relative overflow-hidden;
   /* Custom properties that can't be achieved with utilities */
-  background: linear-gradient(
-    135deg,
-    theme("colors.blue.500"),
-    theme("colors.purple.600")
-  );
+  background: linear-gradient(135deg, theme('colors.blue.500'), theme('colors.purple.600'));
 }
 
 .title {
@@ -116,9 +112,7 @@ Use CSS modules for complex components:
       class="ai-response bg-gradient-to-r from-blue-50 to-indigo-50 border-l-4 border-blue-500 p-4 rounded-r-lg"
     >
       <div class="flex items-start space-x-3">
-        <div
-          class="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center"
-        >
+        <div class="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center">
           <Icon name="robot" class="w-4 h-4 text-white" />
         </div>
         <div class="flex-1 prose prose-sm max-w-none">
@@ -145,11 +139,7 @@ Use CSS modules for complex components:
       class="absolute bottom-3 right-3 w-8 h-8 bg-blue-500 hover:bg-blue-600 disabled:bg-gray-300 rounded-lg flex items-center justify-center transition-colors duration-200"
       :disabled="!prompt.trim() || isLoading"
     >
-      <Icon
-        v-if="isLoading"
-        name="spinner"
-        class="w-4 h-4 text-white animate-spin"
-      />
+      <Icon v-if="isLoading" name="spinner" class="w-4 h-4 text-white animate-spin" />
       <Icon v-else name="send" class="w-4 h-4 text-white" />
     </button>
   </div>
@@ -165,12 +155,8 @@ Always start with mobile styles and enhance for larger screens:
 ```vue
 <template>
   <!-- Mobile-first responsive grid -->
-  <div
-    class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
-  >
-    <div
-      class="ai-card bg-white rounded-lg shadow-md p-4 hover:shadow-lg transition-shadow duration-200"
-    >
+  <div class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+    <div class="ai-card bg-white rounded-lg shadow-md p-4 hover:shadow-lg transition-shadow duration-200">
       <!-- Card content -->
     </div>
   </div>
@@ -246,21 +232,15 @@ module.exports = {
 <template>
   <div class="ai-content">
     <!-- AI Response Typography -->
-    <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
-      AI Assistant
-    </h1>
+    <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-6">AI Assistant</h1>
 
-    <h2 class="text-xl sm:text-2xl font-semibold text-gray-800 mb-4">
-      Response Section
-    </h2>
+    <h2 class="text-xl sm:text-2xl font-semibold text-gray-800 mb-4">Response Section</h2>
 
     <p class="text-base sm:text-lg text-gray-600 leading-relaxed mb-4">
       AI-generated content with proper line height for readability.
     </p>
 
-    <code class="text-sm bg-gray-100 text-gray-800 px-2 py-1 rounded font-mono">
-      AI code output
-    </code>
+    <code class="text-sm bg-gray-100 text-gray-800 px-2 py-1 rounded font-mono"> AI code output </code>
   </div>
 </template>
 ```
@@ -273,14 +253,8 @@ module.exports = {
   <div class="ai-thinking flex items-center space-x-2 p-4">
     <div class="flex space-x-1">
       <div class="w-2 h-2 bg-blue-500 rounded-full animate-bounce"></div>
-      <div
-        class="w-2 h-2 bg-blue-500 rounded-full animate-bounce"
-        style="animation-delay: 0.1s"
-      ></div>
-      <div
-        class="w-2 h-2 bg-blue-500 rounded-full animate-bounce"
-        style="animation-delay: 0.2s"
-      ></div>
+      <div class="w-2 h-2 bg-blue-500 rounded-full animate-bounce" style="animation-delay: 0.1s"></div>
+      <div class="w-2 h-2 bg-blue-500 rounded-full animate-bounce" style="animation-delay: 0.2s"></div>
     </div>
     <span class="text-sm text-gray-600">AI is thinking...</span>
   </div>
@@ -305,9 +279,7 @@ module.exports = {
 ```vue
 <template>
   <!-- Proper focus indicators -->
-  <button
-    class="focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded-lg"
-  >
+  <button class="focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded-lg">
     Generate AI Response
   </button>
 
@@ -346,12 +318,12 @@ Configure Tailwind to purge unused styles:
 // tailwind.config.js
 module.exports = {
   content: [
-    "./components/**/*.{js,vue,ts}",
-    "./layouts/**/*.vue",
-    "./pages/**/*.vue",
-    "./plugins/**/*.{js,ts}",
-    "./nuxt.config.{js,ts}",
-    "./app.vue",
+    './components/**/*.{js,vue,ts}',
+    './layouts/**/*.vue',
+    './pages/**/*.vue',
+    './plugins/**/*.{js,ts}',
+    './nuxt.config.{js,ts}',
+    './app.vue',
   ],
   // ...
 };
@@ -364,7 +336,7 @@ Use Nuxt's CSS optimization:
 ```js
 // nuxt.config.ts
 export default defineNuxtConfig({
-  css: ["~/assets/css/main.css"],
+  css: ['~/assets/css/main.css'],
   postcss: {
     plugins: {
       tailwindcss: {},
@@ -380,13 +352,9 @@ export default defineNuxtConfig({
 
 ```vue
 <template>
-  <div
-    class="ai-chat-interface min-h-screen bg-gradient-to-br from-gray-50 to-blue-50"
-  >
+  <div class="ai-chat-interface min-h-screen bg-gradient-to-br from-gray-50 to-blue-50">
     <!-- Header -->
-    <header
-      class="sticky top-0 z-10 bg-white/80 backdrop-blur-sm border-b border-gray-200"
-    >
+    <header class="sticky top-0 z-10 bg-white/80 backdrop-blur-sm border-b border-gray-200">
       <div class="mx-auto max-w-4xl px-4 py-4">
         <h1 class="text-2xl font-bold text-gray-900">AI Assistant</h1>
       </div>
@@ -397,9 +365,7 @@ export default defineNuxtConfig({
       <div class="space-y-6 mb-6">
         <!-- User Message -->
         <div class="flex justify-end">
-          <div
-            class="max-w-xs sm:max-w-md lg:max-w-lg bg-blue-500 text-white rounded-lg rounded-br-none p-4"
-          >
+          <div class="max-w-xs sm:max-w-md lg:max-w-lg bg-blue-500 text-white rounded-lg rounded-br-none p-4">
             <p class="text-sm sm:text-base">{{ userMessage }}</p>
           </div>
         </div>
@@ -426,9 +392,7 @@ export default defineNuxtConfig({
       </div>
 
       <!-- Input Area -->
-      <div
-        class="sticky bottom-0 bg-white/80 backdrop-blur-sm border-t border-gray-200 p-4"
-      >
+      <div class="sticky bottom-0 bg-white/80 backdrop-blur-sm border-t border-gray-200 p-4">
         <div class="relative">
           <textarea
             v-model="currentMessage"
@@ -441,11 +405,7 @@ export default defineNuxtConfig({
             class="absolute bottom-3 right-3 w-8 h-8 bg-blue-500 hover:bg-blue-600 disabled:bg-gray-300 rounded-lg flex items-center justify-center transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
             :disabled="!currentMessage.trim() || isLoading"
           >
-            <Icon
-              v-if="isLoading"
-              name="spinner"
-              class="w-4 h-4 text-white animate-spin"
-            />
+            <Icon v-if="isLoading" name="spinner" class="w-4 h-4 text-white animate-spin" />
             <Icon v-else name="send" class="w-4 h-4 text-white" />
           </button>
         </div>
@@ -455,11 +415,11 @@ export default defineNuxtConfig({
 </template>
 
 <script setup lang="ts">
-const currentMessage = ref("");
+const currentMessage = ref('');
 const isLoading = ref(false);
-const userMessage = ref("How can AI help with my project?");
+const userMessage = ref('How can AI help with my project?');
 const aiResponse = ref(
-  "I can help you with various aspects of your project including code generation, debugging, architecture decisions, and best practices. What specific area would you like assistance with?",
+  'I can help you with various aspects of your project including code generation, debugging, architecture decisions, and best practices. What specific area would you like assistance with?'
 );
 
 const sendMessage = async () => {
@@ -470,7 +430,7 @@ const sendMessage = async () => {
   await new Promise((resolve) => setTimeout(resolve, 2000));
   isLoading.value = false;
 
-  currentMessage.value = "";
+  currentMessage.value = '';
 };
 </script>
 ```

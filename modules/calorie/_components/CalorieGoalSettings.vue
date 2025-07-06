@@ -22,12 +22,7 @@
       />
 
       <!-- Goal Type -->
-      <BaseSelect
-        v-model="form.goal"
-        label="Goal Type"
-        required
-        :error="errors.goal"
-      >
+      <BaseSelect v-model="form.goal" label="Goal Type" required :error="errors.goal">
         <option value="lose-weight">Lose Weight</option>
         <option value="maintain-weight">Maintain Weight</option>
         <option value="gain-weight">Gain Weight</option>
@@ -51,7 +46,7 @@
       <!-- Macronutrient Goals -->
       <div class="space-y-4">
         <h3 class="text-md font-medium text-gray-900">Macronutrient Goals (Optional)</h3>
-        
+
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
           <BaseInput
             v-model="form.protein"
@@ -63,7 +58,7 @@
             :error="errors.protein"
             hint="0.8-1.2g per kg body weight"
           />
-          
+
           <BaseInput
             v-model="form.carbs"
             label="Carbs (g)"
@@ -74,7 +69,7 @@
             :error="errors.carbs"
             hint="45-65% of total calories"
           />
-          
+
           <BaseInput
             v-model="form.fat"
             label="Fat (g)"
@@ -91,10 +86,8 @@
       <!-- Calorie Calculator -->
       <div class="bg-blue-50 p-4 rounded-lg">
         <h3 class="text-md font-medium text-gray-900 mb-3">Calorie Calculator</h3>
-        <p class="text-sm text-gray-600 mb-4">
-          Get a personalized calorie recommendation based on your profile
-        </p>
-        
+        <p class="text-sm text-gray-600 mb-4">Get a personalized calorie recommendation based on your profile</p>
+
         <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-4">
           <BaseInput
             v-model="calculator.weight"
@@ -105,7 +98,7 @@
             step="0.5"
             placeholder="70"
           />
-          
+
           <BaseInput
             v-model="calculator.height"
             label="Height (cm)"
@@ -114,36 +107,20 @@
             max="250"
             placeholder="170"
           />
-          
-          <BaseInput
-            v-model="calculator.age"
-            label="Age"
-            type="number"
-            min="16"
-            max="120"
-            placeholder="25"
-          />
-          
-          <BaseSelect
-            v-model="calculator.sex"
-            label="Sex"
-            placeholder="Select sex"
-          >
+
+          <BaseInput v-model="calculator.age" label="Age" type="number" min="16" max="120" placeholder="25" />
+
+          <BaseSelect v-model="calculator.sex" label="Sex" placeholder="Select sex">
             <option value="male">Male</option>
             <option value="female">Female</option>
           </BaseSelect>
         </div>
-        
+
         <div class="flex justify-between items-center">
-          <BaseButton
-            type="button"
-            variant="secondary"
-            @click="calculateCalories"
-            :disabled="!canCalculate"
-          >
+          <BaseButton type="button" variant="secondary" @click="calculateCalories" :disabled="!canCalculate">
             Calculate Recommended Calories
           </BaseButton>
-          
+
           <div v-if="recommendedCalories" class="text-sm text-gray-600">
             Recommended: <span class="font-semibold">{{ recommendedCalories }}</span> calories/day
           </div>
@@ -153,7 +130,7 @@
       <!-- Macro Percentage Guide -->
       <div class="bg-gray-50 p-4 rounded-lg">
         <h3 class="text-md font-medium text-gray-900 mb-3">Macro Distribution Guide</h3>
-        
+
         <div class="space-y-2 text-sm">
           <div class="flex justify-between">
             <span>Protein ({{ proteinPercentage }}%)</span>
@@ -180,28 +157,13 @@
       <div class="space-y-3">
         <h3 class="text-md font-medium text-gray-900">Quick Presets</h3>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-2">
-          <BaseButton
-            type="button"
-            variant="secondary"
-            size="sm"
-            @click="applyPreset('balanced')"
-          >
+          <BaseButton type="button" variant="secondary" size="sm" @click="applyPreset('balanced')">
             Balanced (40/30/30)
           </BaseButton>
-          <BaseButton
-            type="button"
-            variant="secondary"
-            size="sm"
-            @click="applyPreset('low-carb')"
-          >
+          <BaseButton type="button" variant="secondary" size="sm" @click="applyPreset('low-carb')">
             Low Carb (30/20/50)
           </BaseButton>
-          <BaseButton
-            type="button"
-            variant="secondary"
-            size="sm"
-            @click="applyPreset('high-protein')"
-          >
+          <BaseButton type="button" variant="secondary" size="sm" @click="applyPreset('high-protein')">
             High Protein (35/35/30)
           </BaseButton>
         </div>
@@ -209,18 +171,8 @@
 
       <!-- Actions -->
       <div class="flex justify-end space-x-3 pt-4">
-        <BaseButton
-          variant="secondary"
-          @click="$emit('cancel')"
-          type="button"
-        >
-          Cancel
-        </BaseButton>
-        <BaseButton
-          type="submit"
-          :disabled="!canSubmit"
-          :loading="isSubmitting"
-        >
+        <BaseButton variant="secondary" @click="$emit('cancel')" type="button"> Cancel </BaseButton>
+        <BaseButton type="submit" :disabled="!canSubmit" :loading="isSubmitting">
           {{ isEditing ? 'Update Goal' : 'Set Goal' }}
         </BaseButton>
       </div>
@@ -229,22 +181,22 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, onMounted } from 'vue'
-import type { CalorieGoal, CreateCalorieGoalInput, UpdateCalorieGoalInput } from '../_types/calorie'
-import { CreateCalorieGoalSchema, UpdateCalorieGoalSchema } from '../_types/calorie'
-import { calculateBMR, calculateTDEE, calculateCalorieGoal } from '../_utils/calorie-helpers'
+import { ref, computed, onMounted } from 'vue';
+import type { CalorieGoal, CreateCalorieGoalInput, UpdateCalorieGoalInput } from '../_types/calorie';
+import { CreateCalorieGoalSchema, UpdateCalorieGoalSchema } from '../_types/calorie';
+import { calculateBMR, calculateTDEE, calculateCalorieGoal } from '../_utils/calorie-helpers';
 
 interface Props {
-  goal?: CalorieGoal
-  isEditing?: boolean
+  goal?: CalorieGoal;
+  isEditing?: boolean;
 }
 
-const props = defineProps<Props>()
+const props = defineProps<Props>();
 
 const emit = defineEmits<{
-  submit: [data: CreateCalorieGoalInput | UpdateCalorieGoalInput]
-  cancel: []
-}>()
+  submit: [data: CreateCalorieGoalInput | UpdateCalorieGoalInput];
+  cancel: [];
+}>();
 
 // Form state
 const form = ref({
@@ -254,22 +206,22 @@ const form = ref({
   fat: 67,
   activityLevel: 'moderately-active',
   goal: 'maintain-weight',
-  isActive: true
-})
+  isActive: true,
+});
 
 // Calculator state
 const calculator = ref({
   weight: 70,
   height: 170,
   age: 25,
-  sex: 'male'
-})
+  sex: 'male',
+});
 
-const recommendedCalories = ref<number | null>(null)
+const recommendedCalories = ref<number | null>(null);
 
 // Validation state
-const errors = ref<Record<string, string>>({})
-const isSubmitting = ref(false)
+const errors = ref<Record<string, string>>({});
+const isSubmitting = ref(false);
 
 // Initialize form
 onMounted(() => {
@@ -281,112 +233,111 @@ onMounted(() => {
       fat: props.goal.fat || 67,
       activityLevel: props.goal.activityLevel,
       goal: props.goal.goal,
-      isActive: props.goal.isActive
-    }
+      isActive: props.goal.isActive,
+    };
   }
-})
+});
 
 // Computed properties
 const canCalculate = computed(() => {
-  return calculator.value.weight > 0 && 
-         calculator.value.height > 0 && 
-         calculator.value.age > 0 && 
-         calculator.value.sex
-})
+  return calculator.value.weight > 0 && calculator.value.height > 0 && calculator.value.age > 0 && calculator.value.sex;
+});
 
 const canSubmit = computed(() => {
-  return form.value.dailyCalories >= 800 && 
-         form.value.dailyCalories <= 5000 && 
-         form.value.activityLevel && 
-         form.value.goal && 
-         !isSubmitting.value
-})
+  return (
+    form.value.dailyCalories >= 800 &&
+    form.value.dailyCalories <= 5000 &&
+    form.value.activityLevel &&
+    form.value.goal &&
+    !isSubmitting.value
+  );
+});
 
 // Macro calculations
-const proteinCalories = computed(() => (form.value.protein || 0) * 4)
-const carbsCalories = computed(() => (form.value.carbs || 0) * 4)
-const fatCalories = computed(() => (form.value.fat || 0) * 9)
-const totalMacroCalories = computed(() => proteinCalories.value + carbsCalories.value + fatCalories.value)
+const proteinCalories = computed(() => (form.value.protein || 0) * 4);
+const carbsCalories = computed(() => (form.value.carbs || 0) * 4);
+const fatCalories = computed(() => (form.value.fat || 0) * 9);
+const totalMacroCalories = computed(() => proteinCalories.value + carbsCalories.value + fatCalories.value);
 
 const proteinPercentage = computed(() => {
-  if (form.value.dailyCalories === 0) return 0
-  return Math.round((proteinCalories.value / form.value.dailyCalories) * 100)
-})
+  if (form.value.dailyCalories === 0) return 0;
+  return Math.round((proteinCalories.value / form.value.dailyCalories) * 100);
+});
 
 const carbsPercentage = computed(() => {
-  if (form.value.dailyCalories === 0) return 0
-  return Math.round((carbsCalories.value / form.value.dailyCalories) * 100)
-})
+  if (form.value.dailyCalories === 0) return 0;
+  return Math.round((carbsCalories.value / form.value.dailyCalories) * 100);
+});
 
 const fatPercentage = computed(() => {
-  if (form.value.dailyCalories === 0) return 0
-  return Math.round((fatCalories.value / form.value.dailyCalories) * 100)
-})
+  if (form.value.dailyCalories === 0) return 0;
+  return Math.round((fatCalories.value / form.value.dailyCalories) * 100);
+});
 
 // Methods
 const calculateCalories = () => {
-  if (!canCalculate.value) return
+  if (!canCalculate.value) return;
 
   const bmr = calculateBMR(
     calculator.value.weight,
     calculator.value.height,
     calculator.value.age,
     calculator.value.sex as 'male' | 'female'
-  )
-  
-  const tdee = calculateTDEE(bmr, form.value.activityLevel as any)
-  const goalCalories = calculateCalorieGoal(tdee, form.value.goal as any)
-  
-  recommendedCalories.value = goalCalories
-  form.value.dailyCalories = goalCalories
-}
+  );
+
+  const tdee = calculateTDEE(bmr, form.value.activityLevel as any);
+  const goalCalories = calculateCalorieGoal(tdee, form.value.goal as any);
+
+  recommendedCalories.value = goalCalories;
+  form.value.dailyCalories = goalCalories;
+};
 
 const applyPreset = (preset: 'balanced' | 'low-carb' | 'high-protein') => {
-  const calories = form.value.dailyCalories
+  const calories = form.value.dailyCalories;
 
   switch (preset) {
     case 'balanced': // 40% carbs, 30% protein, 30% fat
-      form.value.carbs = Math.round((calories * 0.4) / 4)
-      form.value.protein = Math.round((calories * 0.3) / 4)
-      form.value.fat = Math.round((calories * 0.3) / 9)
-      break
-    
+      form.value.carbs = Math.round((calories * 0.4) / 4);
+      form.value.protein = Math.round((calories * 0.3) / 4);
+      form.value.fat = Math.round((calories * 0.3) / 9);
+      break;
+
     case 'low-carb': // 20% carbs, 30% protein, 50% fat
-      form.value.carbs = Math.round((calories * 0.2) / 4)
-      form.value.protein = Math.round((calories * 0.3) / 4)
-      form.value.fat = Math.round((calories * 0.5) / 9)
-      break
-    
+      form.value.carbs = Math.round((calories * 0.2) / 4);
+      form.value.protein = Math.round((calories * 0.3) / 4);
+      form.value.fat = Math.round((calories * 0.5) / 9);
+      break;
+
     case 'high-protein': // 35% carbs, 35% protein, 30% fat
-      form.value.carbs = Math.round((calories * 0.35) / 4)
-      form.value.protein = Math.round((calories * 0.35) / 4)
-      form.value.fat = Math.round((calories * 0.3) / 9)
-      break
+      form.value.carbs = Math.round((calories * 0.35) / 4);
+      form.value.protein = Math.round((calories * 0.35) / 4);
+      form.value.fat = Math.round((calories * 0.3) / 9);
+      break;
   }
-}
+};
 
 const validateForm = () => {
-  errors.value = {}
-  
+  errors.value = {};
+
   if (!form.value.dailyCalories || form.value.dailyCalories < 800 || form.value.dailyCalories > 5000) {
-    errors.value.dailyCalories = 'Daily calories must be between 800 and 5000'
-  }
-  
-  if (!form.value.activityLevel) {
-    errors.value.activityLevel = 'Please select an activity level'
-  }
-  
-  if (!form.value.goal) {
-    errors.value.goal = 'Please select a goal type'
+    errors.value.dailyCalories = 'Daily calories must be between 800 and 5000';
   }
 
-  return Object.keys(errors.value).length === 0
-}
+  if (!form.value.activityLevel) {
+    errors.value.activityLevel = 'Please select an activity level';
+  }
+
+  if (!form.value.goal) {
+    errors.value.goal = 'Please select a goal type';
+  }
+
+  return Object.keys(errors.value).length === 0;
+};
 
 const handleSubmit = async () => {
-  if (!validateForm()) return
+  if (!validateForm()) return;
 
-  isSubmitting.value = true
+  isSubmitting.value = true;
 
   try {
     const goalData = {
@@ -396,24 +347,24 @@ const handleSubmit = async () => {
       fat: form.value.fat ? Number(form.value.fat) : undefined,
       activityLevel: form.value.activityLevel as any,
       goal: form.value.goal as any,
-      isActive: form.value.isActive
-    }
+      isActive: form.value.isActive,
+    };
 
     // Validate with Zod
     if (props.isEditing) {
-      UpdateCalorieGoalSchema.parse(goalData)
+      UpdateCalorieGoalSchema.parse(goalData);
     } else {
-      CreateCalorieGoalSchema.parse(goalData)
+      CreateCalorieGoalSchema.parse(goalData);
     }
 
-    emit('submit', goalData)
+    emit('submit', goalData);
   } catch (error) {
-    console.error('Form submission error:', error)
+    console.error('Form submission error:', error);
     if (error instanceof Error) {
-      errors.value.submit = error.message
+      errors.value.submit = error.message;
     }
   } finally {
-    isSubmitting.value = false
+    isSubmitting.value = false;
   }
-}
+};
 </script>

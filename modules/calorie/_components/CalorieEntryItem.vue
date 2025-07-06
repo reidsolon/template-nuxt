@@ -8,9 +8,7 @@
           <BaseBadge :variant="getMealTypeVariant(entry.mealType)">
             {{ capitalizeFirst(entry.mealType) }}
           </BaseBadge>
-          <BaseBadge v-if="entry.food.isCustom" variant="secondary">
-            Custom
-          </BaseBadge>
+          <BaseBadge v-if="entry.food.isCustom" variant="secondary"> Custom </BaseBadge>
         </div>
 
         <div class="text-sm text-gray-600 mb-2">
@@ -36,7 +34,9 @@
         <div v-if="showNutrition" class="mt-3 p-3 bg-gray-50 rounded-md">
           <h4 class="font-medium text-gray-900 mb-2">Nutrition Information</h4>
           <div class="grid grid-cols-2 gap-2 text-sm">
-            <div>Calories: <span class="font-medium">{{ entry.totalCalories }}</span></div>
+            <div>
+              Calories: <span class="font-medium">{{ entry.totalCalories }}</span>
+            </div>
             <div v-if="entry.totalNutrition.protein">
               Protein: <span class="font-medium">{{ formatNutrition(entry.totalNutrition.protein) }}g</span>
             </div>
@@ -75,7 +75,7 @@
           >
             <Icon name="heroicons:information-circle" class="w-4 h-4" />
           </button>
-          
+
           <button
             v-if="entry.notes"
             @click="toggleNotes"
@@ -84,7 +84,7 @@
           >
             <Icon name="heroicons:chat-bubble-left" class="w-4 h-4" />
           </button>
-          
+
           <button
             @click="handleDuplicate"
             class="p-1 text-gray-400 hover:text-gray-600 rounded-md hover:bg-gray-100"
@@ -102,7 +102,7 @@
           >
             <Icon name="heroicons:pencil" class="w-4 h-4" />
           </button>
-          
+
           <button
             @click="handleDelete"
             class="p-1 text-red-400 hover:text-red-600 rounded-md hover:bg-red-50"
@@ -116,33 +116,19 @@
     </div>
 
     <!-- Confirmation Modal for Delete -->
-    <div 
+    <div
       v-if="showDeleteConfirm"
       class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
       @click="showDeleteConfirm = false"
     >
-      <div 
-        class="bg-white rounded-lg p-6 max-w-sm mx-4"
-        @click.stop
-      >
+      <div class="bg-white rounded-lg p-6 max-w-sm mx-4" @click.stop>
         <h3 class="text-lg font-medium text-gray-900 mb-4">Delete Entry</h3>
         <p class="text-gray-600 mb-6">
           Are you sure you want to delete this calorie entry? This action cannot be undone.
         </p>
         <div class="flex justify-end space-x-3">
-          <BaseButton
-            variant="secondary"
-            @click="showDeleteConfirm = false"
-          >
-            Cancel
-          </BaseButton>
-          <BaseButton
-            variant="destructive"
-            @click="confirmDelete"
-            :loading="isDeleting"
-          >
-            Delete
-          </BaseButton>
+          <BaseButton variant="secondary" @click="showDeleteConfirm = false"> Cancel </BaseButton>
+          <BaseButton variant="destructive" @click="confirmDelete" :loading="isDeleting"> Delete </BaseButton>
         </div>
       </div>
     </div>
@@ -150,90 +136,92 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
-import type { CalorieEntryWithFood } from '../_types/calorie'
-import { formatNutritionValue } from '../_utils/calorie-helpers'
+import { ref } from 'vue';
+import type { CalorieEntryWithFood } from '../_types/calorie';
+import { formatNutritionValue } from '../_utils/calorie-helpers';
 
 interface Props {
-  entry: CalorieEntryWithFood
-  compact?: boolean
+  entry: CalorieEntryWithFood;
+  compact?: boolean;
 }
 
-const props = defineProps<Props>()
+const props = defineProps<Props>();
 
 const emit = defineEmits<{
-  edit: [entry: CalorieEntryWithFood]
-  delete: [entryId: string]
-  duplicate: [entry: CalorieEntryWithFood]
-}>()
+  edit: [entry: CalorieEntryWithFood];
+  delete: [entryId: string];
+  duplicate: [entry: CalorieEntryWithFood];
+}>();
 
 // Component state
-const showNutrition = ref(false)
-const showFullNotes = ref(false)
-const showDeleteConfirm = ref(false)
-const isDeleting = ref(false)
+const showNutrition = ref(false);
+const showFullNotes = ref(false);
+const showDeleteConfirm = ref(false);
+const isDeleting = ref(false);
 
 // Methods
 const toggleNutrition = () => {
-  showNutrition.value = !showNutrition.value
-}
+  showNutrition.value = !showNutrition.value;
+};
 
 const toggleNotes = () => {
-  showFullNotes.value = !showFullNotes.value
-}
+  showFullNotes.value = !showFullNotes.value;
+};
 
 const handleEdit = () => {
-  emit('edit', props.entry)
-}
+  emit('edit', props.entry);
+};
 
 const handleDelete = () => {
-  showDeleteConfirm.value = true
-}
+  showDeleteConfirm.value = true;
+};
 
 const confirmDelete = async () => {
-  isDeleting.value = true
+  isDeleting.value = true;
   try {
-    emit('delete', props.entry.id)
-    showDeleteConfirm.value = false
+    emit('delete', props.entry.id);
+    showDeleteConfirm.value = false;
   } finally {
-    isDeleting.value = false
+    isDeleting.value = false;
   }
-}
+};
 
 const handleDuplicate = () => {
-  emit('duplicate', props.entry)
-}
+  emit('duplicate', props.entry);
+};
 
 // Utility methods
 const capitalizeFirst = (str: string): string => {
-  return str.charAt(0).toUpperCase() + str.slice(1)
-}
+  return str.charAt(0).toUpperCase() + str.slice(1);
+};
 
-const getMealTypeVariant = (mealType: string): "default" | "primary" | "secondary" | "success" | "warning" | "danger" => {
+const getMealTypeVariant = (
+  mealType: string
+): 'default' | 'primary' | 'secondary' | 'success' | 'warning' | 'danger' => {
   const variants = {
     breakfast: 'warning' as const,
     lunch: 'success' as const,
     dinner: 'primary' as const,
-    snack: 'secondary' as const
-  }
-  return variants[mealType as keyof typeof variants] || 'default'
-}
+    snack: 'secondary' as const,
+  };
+  return variants[mealType as keyof typeof variants] || 'default';
+};
 
 const formatTime = (date: Date): string => {
-  return date.toLocaleTimeString('en-US', { 
-    hour: 'numeric', 
+  return date.toLocaleTimeString('en-US', {
+    hour: 'numeric',
     minute: '2-digit',
-    hour12: true 
-  })
-}
+    hour12: true,
+  });
+};
 
 const truncateNotes = (notes: string, maxLength: number = 30): string => {
-  if (notes.length <= maxLength) return notes
-  return notes.substring(0, maxLength) + '...'
-}
+  if (notes.length <= maxLength) return notes;
+  return notes.substring(0, maxLength) + '...';
+};
 
 const formatNutrition = (value: number | undefined): string => {
-  if (value === undefined) return '0'
-  return value.toFixed(1)
-}
+  if (value === undefined) return '0';
+  return value.toFixed(1);
+};
 </script>
